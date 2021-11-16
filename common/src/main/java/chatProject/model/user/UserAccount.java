@@ -36,20 +36,20 @@ public class UserAccount {
      * @return the username
      */
     public String getUsername() {
-        return "test";
+        return this.username;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAccount that = (UserAccount) o;
-        return id == that.id;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        final UserAccount that = (UserAccount) o;
+        return Objects.equals(this.getUsername(), that.getUsername());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.getUsername());
     }
 
     @Override
