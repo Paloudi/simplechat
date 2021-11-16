@@ -10,6 +10,8 @@ import chatProject.model.user.UserInfo;
  */
 public class Message<T> {
 
+    //region Private Properties
+
     /**
      * The ID of the message (unique).
      */
@@ -23,18 +25,28 @@ public class Message<T> {
      */
     private final T content;
 
+    //endregion
+
+    /**
+     * COnstructor
+     * @param id id
+     * @param sender send info
+     * @param content message content
+     */
     public Message(int id, UserInfo sender, T content) {
         this.id = id;
         this.sender = (sender == null) ? null : new MessageOwnerConcrete(sender.getAccount(), sender.getCurrentStatus());
         this.content = content;
     }
 
+    //region Public Getters
+
     /**
      * Gets the ID of the message.
      * @return the message unique ID
      */
     public int getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -52,6 +64,8 @@ public class Message<T> {
     public T getMessage() {
         return content;
     }
+
+    //endregion
 
     @Override
     public String toString() {

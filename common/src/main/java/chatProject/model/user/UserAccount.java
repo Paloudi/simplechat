@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 public class UserAccount {
 
+    //region Private Properties
+
     /**
      * The ID of a user (not needed).
      */
@@ -18,10 +20,19 @@ public class UserAccount {
      */
     private final String username;
 
+    //endregion
+
+    /**
+     * Constructor
+     * @param id user id
+     * @param username user name
+     */
     public UserAccount(int id, String username) {
         this.id = id;
         this.username = username;
     }
+
+    //region Public Getters
 
     /**
      * Gets the ID of a user (not needed).
@@ -38,6 +49,8 @@ public class UserAccount {
     public String getUsername() {
         return this.username;
     }
+
+    //endregion
 
     @Override
     public boolean equals(final Object o) {

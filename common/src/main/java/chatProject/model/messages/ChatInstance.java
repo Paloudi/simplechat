@@ -14,6 +14,8 @@ import java.util.*;
  */
 public class ChatInstance<T> {
 
+    //region Private Properties
+
     /**
      * The list of chatrooms in the chat.
      */
@@ -26,8 +28,15 @@ public class ChatInstance<T> {
      */
     private final Map<UserInfo, LocalTime> users;
 
-    public ChatInstance(List<Chatroom<T>> chatrooms, Map<UserInfo, LocalTime> users) {
-        this.chatrooms = chatrooms;
+    //endregion
+
+    /**
+     * Constructor
+     * @param chatRooms chatRooms
+     * @param users list of users
+     */
+    public ChatInstance(List<Chatroom<T>> chatRooms, Map<UserInfo, LocalTime> users) {
+        chatrooms = chatRooms;
         this.users = users;
     }
 
@@ -35,7 +44,7 @@ public class ChatInstance<T> {
      * Gets the list of chatrooms in the chat.
      * @return the list of {@link Chatroom} in the model
      */
-    public List<Chatroom<T>> getCurentChatrooms() {
+    public List<Chatroom<T>> getCurrentChatrooms() {
         // return a safe read-only copy
         return Collections.unmodifiableList(chatrooms);
     }
@@ -46,13 +55,12 @@ public class ChatInstance<T> {
      * @return the ID of the new chatroom added
      */
     public int addChatroom(Chatroom<T> newChatroom) {
-        if (null == this.chatrooms) {
-            this.chatrooms = new LinkedList<>();
+        if (null == chatrooms) {
+            chatrooms = new LinkedList<>();
         }
-        this.chatrooms.add(newChatroom);
-        return this.chatrooms.indexOf(newChatroom);
+        chatrooms.add(newChatroom);
+        return chatrooms.indexOf(newChatroom);
     }
-
 
     /**
      * Adds a new {@link UserInfo} in the chat.
@@ -74,11 +82,11 @@ public class ChatInstance<T> {
             final UserInfo userInfo = accountAlreadyPresent.get();
             userInfo.setCurrentStatus(newUser.getCurrentStatus());
             users.replace(userInfo, LocalTime.now());
-            return true;
         } else {
             users.put(newUser, LocalTime.now());
-            return true;
         }
+        return true;
+
     }
 
     /**

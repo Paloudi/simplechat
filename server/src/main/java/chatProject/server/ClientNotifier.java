@@ -18,10 +18,20 @@ import java.net.Socket;
  */
 public class ClientNotifier<T> implements ClientNotifierInterface<T> {
 
+    //region Private Properties
+
     private final PrintWriter writer;
     private final BufferedReader reader;
     private final Gson json;
 
+    //endregion
+
+    /**
+     * Constructor
+     * @param writer writer
+     * @param reader reader
+     * @param json json
+     */
     public ClientNotifier(PrintWriter writer, BufferedReader reader, Gson json) {
         this.writer = writer;
         this.reader = reader;
@@ -45,6 +55,7 @@ public class ClientNotifier<T> implements ClientNotifierInterface<T> {
         );
     }
 
+    //region Notification Actions
 
     /**
      * {@inheritDoc}
@@ -76,10 +87,11 @@ public class ClientNotifier<T> implements ClientNotifierInterface<T> {
     @Override
     public void notifyUserChange(UserInfo user) {
         writer.println(
-                2
-                        + json.toJson(user)
+                2 + json.toJson(user)
         );
     }
+
+    //endregion
 
     /**
      * Checks if the client is still connected

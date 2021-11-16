@@ -2,6 +2,7 @@ package chatProject.model.messages;
 
 import chatProject.model.user.UserInfo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
  * @param <T> the type of messages in the chat
  */
 public class Chatroom<T> {
+
+    //region Private Properties
 
     /**
      * The name of the chatroom.
@@ -26,11 +29,21 @@ public class Chatroom<T> {
      */
     private final List<Message<T>> messages;
 
+    //endregion
+
+    /**
+     * Constructor
+     * @param name chatroom name
+     * @param owner owner info
+     * @param messages list of messages
+     */
     public Chatroom(String name, UserInfo owner, List<Message<T>> messages) {
         this.name = name;
         this.owner = owner;
-        this.messages = messages;
+        this.messages = messages != null ? messages : new ArrayList<Message<T>>(){};
     }
+
+    //region Public Getters
 
     /**
      * Gets the name of this chatroom.
@@ -57,6 +70,9 @@ public class Chatroom<T> {
         return Collections.unmodifiableList(messages);
     }
 
+    //endregion
+
+    //region Add Message
     /**
      * Adds a new message in this chatroom given a user and a content.
      * @param userInfo the user who sent the message
@@ -64,8 +80,9 @@ public class Chatroom<T> {
      * @return the new message created
      */
     public Message<T> addMessage(UserInfo userInfo, T content) {
-        final Message<T> message = new Message<>(0, userInfo, content);
-        this.messages.add(message);
+
+        final Message<T> message = new Message<>(messages.size(), userInfo, content);
+        messages.add(message);
         return message;
     }
 
@@ -75,15 +92,15 @@ public class Chatroom<T> {
      * @return the new message
      */
     public Message<T> addMessage(Message<T> newMessage) {
-        this.messages.add(newMessage);
+        messages.add(newMessage);
         return newMessage;
     }
+
+    //endregion
 
     @Override
     public String toString() {
         if (owner == null) {
-            return name;
-        } else if (owner == null) {
             return name;
         } else {
             return name + " (" + owner.getAccount() + ')';

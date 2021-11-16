@@ -26,6 +26,7 @@ public class Main {
         // start the server implementation
         final ChatServer<String> server = ChatServer.initEmptyChat(socketPort, json);
 
+        //Todo : use it or not use it, such is the question
         /*
         new ChatServer<>(FakeInstances.DUMMY_CHAT_INSTANCE, new HashSet<>(), json);
 

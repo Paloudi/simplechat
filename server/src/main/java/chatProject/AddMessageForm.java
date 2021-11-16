@@ -8,10 +8,20 @@ import chatProject.model.user.UserInfo;
  */
 public class AddMessageForm<T> {
 
+    //region Private Properties
+
     private final int chatroomId;
     private final UserInfo user;
     private final T content;
 
+    //endregion
+
+    /**
+     * Constructor
+     * @param chatroomId chatRoom id
+     * @param user user info
+     * @param content message content
+     */
     public AddMessageForm(int chatroomId, UserInfo user, T content) {
         this.chatroomId = chatroomId;
         this.user = user;
