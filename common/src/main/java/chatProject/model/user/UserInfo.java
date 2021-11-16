@@ -42,6 +42,7 @@ public class UserInfo {
      * @param currentStatus the status of the user
      */
     public void setCurrentStatus(Status currentStatus) {
+        this.currentStatus = currentStatus;
     }
 
     @Override
