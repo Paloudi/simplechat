@@ -89,8 +89,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
             }
         });
         server.socketThread = socketThread;
-
-        //TODO: I should start the socket thread here
+        server.socketThread.start();
 
         server.checkIdleClients();
 
