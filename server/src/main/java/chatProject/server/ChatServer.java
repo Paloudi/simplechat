@@ -315,7 +315,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public Message<T> addMessage(int chatroomId, UserInfo user, T content) {
-        return getChatroom(chatroomId).addMessage(user, content);
+        Message<T> msg = this.getChatroom(chatroomId).addMessage(user, content);
+        this.notifyNewMessage(chatroomId, msg);
+        return  msg;
         // return new created message
     }
 
@@ -324,10 +326,11 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public Message<T> notifyNewMessage(int chatroomId, Message<T> newMessage) {
-
-        clientNotifiers.forEach(
-                client -> client.notifyNewMessage(chatroomId, newMessage)
-        );
+        if (null != this.clientNotifiers) {
+            this.clientNotifiers.forEach(
+                    client -> client.notifyNewMessage(chatroomId, newMessage)
+            );
+        }
         return newMessage;
     }
 

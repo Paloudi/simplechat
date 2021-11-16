@@ -17,7 +17,7 @@ public class ChatInstance<T> {
     /**
      * The list of chatrooms in the chat.
      */
-    private final List<Chatroom<T>> chatrooms;
+    private List<Chatroom<T>> chatrooms;
 
     /**
      * The list of users in the chat.
@@ -46,6 +46,9 @@ public class ChatInstance<T> {
      * @return the ID of the new chatroom added
      */
     public int addChatroom(Chatroom<T> newChatroom) {
+        if (null == this.chatrooms) {
+            this.chatrooms = new LinkedList<>();
+        }
         this.chatrooms.add(newChatroom);
         return this.chatrooms.indexOf(newChatroom);
     }
