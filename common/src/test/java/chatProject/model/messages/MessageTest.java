@@ -9,7 +9,7 @@ public class MessageTest {
     @Test
     public void getId() {
         int id = 42;
-        final Message<Object> message = new Message<>(id, null, null);
+        final Message<Object> message = Message.createMessage(id, null, null);
 
         assertEquals("The message ID is not the one set in the constructor",
                 id, message.getId());
@@ -18,10 +18,11 @@ public class MessageTest {
     @Test
     public void getContent() {
         String content = "TEST";
-        final Message<String> message = new Message<>(0, null, content);
+        final Message<String> message = Message.createMessage(0, null, content);
 
         assertEquals("The message content is not the one set in the constructor",
                 content, message.getMessage());
     }
+
 
 }
