@@ -195,8 +195,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public UserInfo login(String userName) {
+        int usersCount = getUsers().size();
         final UserInfo user = new UserInfo(
-                findUser(userName).orElse(new UserAccount(0, "test")),
+                findUser(userName).orElse(new UserAccount(usersCount, userName)),
                 Status.ACTIVE // user just logged in - status is active
         );
         notifyUserChange(user);
@@ -211,18 +212,19 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     public Optional<UserAccount> findUser(String userName) {
         // Test code
-        if (userName.equals("testUser")) {
+        /*if (userName.equals("testUser")) {
             return Optional.of(new UserAccount(0, userName));
         } else {
             return Optional.empty();
-        }
+        }*/
+
         // Real code
-        /*
+
         return chatInstance.getUsers().keySet().stream()
                 .map(UserInfo::getAccount)
                 .filter(account -> account.getUsername().equals(userName))
                 .findAny();
-        */
+
     }
 
     /**

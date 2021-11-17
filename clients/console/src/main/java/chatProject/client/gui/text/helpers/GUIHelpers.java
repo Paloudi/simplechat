@@ -27,7 +27,7 @@ public class GUIHelpers {
      */
     public static void addCloseButton(Panel contentPanel, Runnable action) {
 
-        // add an horizontal space
+        // add a horizontal space
         contentPanel.addComponent(
                 new EmptySpace()
                         .setLayoutData(
@@ -49,7 +49,6 @@ public class GUIHelpers {
         contentPanel.getChildCount();
         contentPanel.getChildCount();
 
-
     }
 
     /**
@@ -60,8 +59,7 @@ public class GUIHelpers {
     public static void addCloseButton(Panel contentPanel, Window window) {
         final Runnable action = window::close;
 
-
-        // add an horizontal space
+        // add a horizontal space
         contentPanel.addComponent(
                 new EmptySpace()
                         .setLayoutData(
