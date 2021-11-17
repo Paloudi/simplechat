@@ -14,6 +14,8 @@ import java.util.logging.Logger;
  */
 public class Message<T> {
 
+    //region Private Properties
+
     /**
      * The ID of the message (unique).
      */
@@ -26,6 +28,8 @@ public class Message<T> {
      * The content of the message.
      */
     private final T content;
+
+    //endregion
 
     private static Logger logger = Logger.getLogger(Message.class.getName());
 
@@ -50,13 +54,15 @@ public class Message<T> {
         Message.logger.info(String.format("New message [ID: %d, sender: %s, content: %s]", id, sender, content));
         return new Message<T>(id, sender, content);
     }
+  
+    //region Public Getters
 
     /**
      * Gets the ID of the message.
      * @return the message unique ID
      */
     public int getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -74,6 +80,8 @@ public class Message<T> {
     public T getMessage() {
         return content;
     }
+
+    //endregion
 
     @Override
     public String toString() {

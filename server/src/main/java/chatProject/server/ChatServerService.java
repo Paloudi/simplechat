@@ -13,6 +13,8 @@ import static spark.Spark.*;
  */
 public class ChatServerService<T> {
 
+    //region Private Properties
+
     /**
      * The server instance to complete the real queries.
      */
@@ -23,6 +25,13 @@ public class ChatServerService<T> {
      */
     private final Gson json;
 
+    //endregion
+
+    /**
+     * Constructor
+     * @param server server
+     * @param json json
+     */
     public ChatServerService(ChatServer<T> server, Gson json) {
         this.server = server;
         this.json = json;
@@ -54,11 +63,10 @@ public class ChatServerService<T> {
             )
         );
 
-        get("/messages/:chatroomId", (request, response) -> {
-                    return json.toJson(
-                            server.getChatroomMessages(Integer.parseInt(request.params("chatroomId")))
-                    );
-                }
+        get("/messages/:chatroomId", (request, response) ->
+                json.toJson(
+                    server.getChatroomMessages(Integer.parseInt(request.params("chatroomId")))
+                )
         );
 
         post("/login", (request, response) ->

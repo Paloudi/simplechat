@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
  */
 public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>, AutoCloseable {
 
+    //region Private properties
+
     /**
      * The model for the chat.
      */
@@ -53,6 +55,16 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     private Thread checkIdleClients = null;
 
+    //endregion
+
+    //region Constructor
+
+    /**
+     * Chat Server Constructor
+     * @param chatInstance chat instance
+     * @param clientNotifiers client notifiers
+     * @param json json
+     */
     public ChatServer(ChatInstance<T> chatInstance,
                       Collection<ClientNotifierInterface<T>> clientNotifiers,
                       Gson json) {
@@ -60,6 +72,10 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         this.clientNotifiers = clientNotifiers;
         this.json = json;
     }
+
+    //endregion
+
+    //region Chat initialization
 
     /**
      * The entry point to generate an instance of this class using an empty {@link ChatInstance} model.
@@ -78,14 +94,11 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
                 json);
 
         // open a dedicated thread to manage the socket for notifications.
-        final Thread socketThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    server.openSocket(socketPort);
-                } catch (IOException e) {
-                    throw new RuntimeException("Unable to open new socket on port " + socketPort, e);
-                }
+        final Thread socketThread = new Thread(() -> {
+            try {
+                server.openSocket(socketPort);
+            } catch (IOException e) {
+                throw new RuntimeException("Unable to open new socket on port " + socketPort, e);
             }
         });
         server.socketThread = socketThread;
@@ -165,7 +178,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         socketThread.interrupt();
     }
 
-    /* **************************** User part *********************/
+    //endregion
+
+    //region User part
 
     /**
      * {@inheritDoc}
@@ -180,8 +195,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public UserInfo login(String userName) {
+        int usersCount = getUsers().size();
         final UserInfo user = new UserInfo(
-                findUser(userName).orElse(new UserAccount(0, "test")),
+                findUser(userName).orElse(new UserAccount(usersCount, userName)),
                 Status.ACTIVE // user just logged in - status is active
         );
         notifyUserChange(user);
@@ -196,18 +212,19 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     public Optional<UserAccount> findUser(String userName) {
         // Test code
-        if (userName.equals("testUser")) {
+        /*if (userName.equals("testUser")) {
             return Optional.of(new UserAccount(0, userName));
         } else {
             return Optional.empty();
-        }
+        }*/
+
         // Real code
-        /*
+
         return chatInstance.getUsers().keySet().stream()
                 .map(UserInfo::getAccount)
                 .filter(account -> account.getUsername().equals(userName))
                 .findAny();
-        */
+
     }
 
     /**
@@ -243,7 +260,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         return user;
     }
 
-    /* **************************** Chatroom part *********************/
+    //endregion
+
+    //region Chatroom part
 
     /**
      * {@inheritDoc}
@@ -252,7 +271,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
     public List<String> getCurrentChatroomNames() {
         return chatInstance
                 // retrieve all chatrooms
-                .getCurentChatrooms()
+                .getCurrentChatrooms()
                 .stream()
                 // get the chatroom name(s) from the model(s) instance(s)
                 .map(Chatroom::getName)
@@ -264,7 +283,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public Chatroom<T> getChatroom(int chatroomId) {
-        return chatInstance.getCurentChatrooms().get(0);
+        return chatInstance.getCurrentChatrooms().get(0);
     }
 
     /**
@@ -298,7 +317,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         return newChatroom;
     }
 
-    /* **************************** Messages part *********************/
+    //endregion
+
+    //region Messages Part
 
     /**
      * {@inheritDoc}
@@ -316,9 +337,12 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
     @Override
     public Message<T> addMessage(int chatroomId, UserInfo user, T content) {
         Message<T> msg = this.getChatroom(chatroomId).addMessage(user, content);
+
+        //Notify users
         this.notifyNewMessage(chatroomId, msg);
-        return  msg;
+
         // return new created message
+        return  msg;
     }
 
     /**
@@ -334,4 +358,5 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         return newMessage;
     }
 
+    //endregion
 }

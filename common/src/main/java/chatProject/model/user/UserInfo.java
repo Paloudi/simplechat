@@ -7,6 +7,8 @@ import java.util.Objects;
  */
 public class UserInfo {
 
+    //region Private Properties
+
     /**
      * The account of the user.
      */
@@ -16,10 +18,19 @@ public class UserInfo {
      */
     private Status currentStatus;
 
+    //endregion
+
+    /**
+     * Constructor
+     * @param account user account
+     * @param currentStatus status
+     */
     public UserInfo(UserAccount account, Status currentStatus) {
         this.account = account;
         this.currentStatus = currentStatus;
     }
+
+    //region Public Getter & Setter
 
     /**
      * Gets the account holding information about the user.
@@ -44,6 +55,8 @@ public class UserInfo {
     public void setCurrentStatus(Status currentStatus) {
         this.currentStatus = currentStatus;
     }
+
+    //endregion
 
     @Override
     public String toString() {

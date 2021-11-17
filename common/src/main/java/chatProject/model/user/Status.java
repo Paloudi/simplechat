@@ -13,6 +13,7 @@ public enum Status {
      * The printable representation of the status.
      */
     private final String printable;
+
     Status(String printable) {
         this.printable = printable;
     }
