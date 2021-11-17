@@ -35,9 +35,9 @@ public class FakeInstances {
     }
 
     public static final Message<String> DUMMY_MESSAGE_1 =
-            new Message<>(0, DUMMY_ACTIVE_USER, "Hello");
+            Message.createMessage(0, DUMMY_ACTIVE_USER, "Hello");
     public static final Message<String> DUMMY_MESSAGE_2 =
-            new Message<>(1, DUMMY_LOGOUT_USER, "Bye");
+            Message.createMessage(1, DUMMY_LOGOUT_USER, "Bye");
 
     public static final Chatroom<String> DUMMY_CHATROOM_1 =
             new Chatroom<>(
