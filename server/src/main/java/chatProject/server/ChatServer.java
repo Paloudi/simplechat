@@ -94,14 +94,14 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
                 json);
 
         // open a dedicated thread to manage the socket for notifications.
-        final Thread socketThread = new Thread(() -> {
+        server.socketThread = new Thread(() -> {
             try {
                 server.openSocket(socketPort);
             } catch (IOException e) {
                 throw new RuntimeException("Unable to open new socket on port " + socketPort, e);
             }
         });
-        server.socketThread = socketThread;
+
         server.socketThread.start();
 
         server.checkIdleClients();
@@ -296,12 +296,16 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         final Chatroom<T> newChatroom = new Chatroom<>(chatroomName, owner, new ArrayList<>());
 
         // add it in the model
-        final int newChatroomId = chatInstance.addChatroom(newChatroom);
+        final Integer newChatroomId = chatInstance.addChatroom(newChatroom);
 
-        /* maybe I should notify clients about the new chatroom ?? */
-        notifyNewChatroom(newChatroom);
+        if(newChatroomId != null){
+            /* maybe I should notify clients about the new chatroom ?? */
+            notifyNewChatroom(newChatroom);
+        }
 
-        return newChatroomId;
+        int id = newChatroomId;
+
+        return id;
     }
 
     /**
