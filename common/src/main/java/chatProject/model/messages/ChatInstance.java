@@ -23,7 +23,7 @@ public class ChatInstance<T> {
 
     /**
      * The list of users in the chat.
-     * The key is the user infomation
+     * The key is the user information
      * The value is the last login time
      */
     private final Map<UserInfo, LocalTime> users;
@@ -54,12 +54,16 @@ public class ChatInstance<T> {
      * @param newChatroom the chatroom to add
      * @return the ID of the new chatroom added
      */
-    public int addChatroom(Chatroom<T> newChatroom) {
+    public Integer addChatroom(Chatroom<T> newChatroom) {
         if (null == chatrooms) {
             chatrooms = new LinkedList<>();
         }
-        chatrooms.add(newChatroom);
-        return chatrooms.indexOf(newChatroom);
+        if(IsChatroomUnique(newChatroom.getName(), chatrooms)){
+            chatrooms.add(newChatroom);
+            return chatrooms.indexOf(newChatroom);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -104,6 +108,23 @@ public class ChatInstance<T> {
      */
     public static <T> ChatInstance<T> initEmptyChat() {
         return new ChatInstance<T>(new ArrayList<Chatroom<T>>() { }, new HashMap<>(10));
+    }
+
+    /**
+     * Determine if the chatroom name is unique
+     * @param chatName new chat room name
+     * @param chatrooms list of existing chat rooms
+     * @return boolean
+     */
+    private boolean IsChatroomUnique(String chatName, List<Chatroom<T>> chatrooms){
+        boolean isUnique = true;
+        for (Chatroom<T> chatroom: chatrooms) {
+            if(chatroom.getName().equalsIgnoreCase(chatName)){
+                isUnique = false;
+                break;
+            }
+        }
+        return isUnique;
     }
 
 }

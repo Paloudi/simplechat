@@ -33,7 +33,15 @@ public class Message<T> {
 
     private static Logger logger = Logger.getLogger(Message.class.getName());
 
-    private Message(final int id, final UserInfo sender, final T content) {
+    //endregion
+
+    /**
+     * COnstructor
+     * @param id id
+     * @param sender send info
+     * @param content message content
+     */
+    public Message(final int id, final UserInfo sender, final T content) {
         super();
         this.id = id;
         if ((null == sender)) {
@@ -49,6 +57,8 @@ public class Message<T> {
         }
         this.content = content;
     }
+
+    //region Public Getters
 
     public static <T> Message<T> createMessage(final int id, final UserInfo sender, final T content) {
         Message.logger.info(String.format("New message [ID: %d, sender: %s, content: %s]", id, sender, content));

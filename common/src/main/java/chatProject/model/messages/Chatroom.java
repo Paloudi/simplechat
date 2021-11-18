@@ -80,7 +80,7 @@ public class Chatroom<T> {
      * @return the new message created
      */
     public Message<T> addMessage(UserInfo userInfo, T content) {
-        final Message<T> message = Message.createMessage(0, userInfo, content);
+        final Message<T> message = new Message<>(0, userInfo, content);
         this.messages.add(message);
         return message;
     }

@@ -24,7 +24,7 @@ L'application doit respecter les besoins suivants :
 Le projet SimpleChat utilise un build multi-projet `Gradle`.
 Le répertoire est composé de 3 projets :
 
-* Un projet `server` contennant le service du serveur.
+* Un projet `server` contenant le service du serveur.
 * Un projet `clients/console` contenant le service d'un client lourd en Java.
 * Un projet `common` contenant le code source partagé par ces 2 services.
 
@@ -35,7 +35,7 @@ Le serveur utilise 2 ports :
 
 Le client se connecte donc à ces 2 ports également.
 
-En effet, certains événements demandent un synchronisation entre le serveur et le client :
+En effet, certains événements demandent une synchronisation entre le serveur et le client :
 
 * Le serveur notifie le client (par la websocket) lors de la création d'une chatroom, d'un message ou lors du changement d'état d'un utilisateur
 * Le client se connecte sur le serveur régulièrement (web service de login) pour notifier que l'utilisateur est toujours actif
