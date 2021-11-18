@@ -29,6 +29,8 @@ public class Message<T> {
      */
     private final T content;
 
+    //endregion
+
     private static Logger logger = Logger.getLogger(Message.class.getName());
 
     //endregion
@@ -62,6 +64,8 @@ public class Message<T> {
         Message.logger.info(String.format("New message [ID: %d, sender: %s, content: %s]", id, sender, content));
         return new Message<T>(id, sender, content);
     }
+  
+    //region Public Getters
 
     /**
      * Gets the ID of the message.
