@@ -9,7 +9,7 @@ L'application doit respecter les besoins suivants :
 * [x] Un utilisateur doit pouvoir créer une chatroom
 * [x] Un utilisateur NE doit PAS pouvoir créer une nouvelle chatroom ayant le même nom qu'une chatroom déjà existante
 * [x] Les utilisateurs doivent pouvoir se connecter à une chatroom simultanément
-* [ ] Les utilisateurs doivent recevoir en temps réel les nouvelles chatroom créées
+* [x] Les utilisateurs doivent recevoir en temps réel les nouvelles chatroom créées
 * [x] Un utilisateur doit pouvoir envoyer un nouveau message sur une chatroom
 * [x] Un utilisateur doit recevoir en temps réel les nouveaux messages envoyés dans une chatroom
 * [x] Le status des utilisateurs doit être mis à jour en temps réel dans le chat (actif / déconnecté)
