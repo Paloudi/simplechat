@@ -85,7 +85,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      * @return a new instance of this class to use as a server
      * @throws IOException not sure when ?
      */
-    public static <T> ChatServer<T> initEmptyChat(int socketPort, Gson json) throws IOException {
+    public static <T> ChatServer<T> initEmptyChat(int socketPort, Gson json) {
 
         // instantiate a new instance of this class with an empty model.
         final ChatServer<T> server = new ChatServer<>(
@@ -283,7 +283,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public Chatroom<T> getChatroom(int chatroomId) {
-        return chatInstance.getCurrentChatrooms().get(0);
+        return chatInstance.getCurrentChatrooms().get(chatroomId);
     }
 
     /**
@@ -296,16 +296,14 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         final Chatroom<T> newChatroom = new Chatroom<>(chatroomName, owner, new ArrayList<>());
 
         // add it in the model
-        final Integer newChatroomId = chatInstance.addChatroom(newChatroom);
+        final int newChatroomId = chatInstance.addChatroom(newChatroom);
 
-        if(newChatroomId != null){
+        if(newChatroomId != -1){
             /* maybe I should notify clients about the new chatroom ?? */
             notifyNewChatroom(newChatroom);
         }
 
-        int id = newChatroomId;
-
-        return id;
+        return newChatroomId;
     }
 
     /**

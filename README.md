@@ -5,19 +5,19 @@ SimpleChat est un ensemble de 2 applications permettant de déployer un serveur 
 ## Besoins fonctionnels ##
 
 L'application doit respecter les besoins suivants :
-* Les utilisateurs doivent pouvoir se connecter sur le serveur de chat en même temps
-* Un utilisateur doit pouvoir créer une chatroom
-* Un utilisateur NE doit PAS pouvoir créer une nouvelle chatroom ayant le même nom qu'une chatroom déjà existante
-* Les utilisateurs doivent pouvoir se connecter à une chatroom simultanément
-* Les utilisateurs doivent recevoir en temps réel les nouvelles chatroom créées
-* Un utilisateur doit pouvoir envoyer un nouveau message sur une chatroom
-* Un utilisateur doit recevoir en temps réel les nouveaux messages envoyés dans une chatroom
-* Le status des utilisateurs doit être mis à jour en temps réel dans le chat (actif / déconnecté)
+* [x] Les utilisateurs doivent pouvoir se connecter sur le serveur de chat en même temps
+* [x] Un utilisateur doit pouvoir créer une chatroom
+* [x] Un utilisateur NE doit PAS pouvoir créer une nouvelle chatroom ayant le même nom qu'une chatroom déjà existante
+* [x] Les utilisateurs doivent pouvoir se connecter à une chatroom simultanément
+* [ ] Les utilisateurs doivent recevoir en temps réel les nouvelles chatroom créées
+* [x] Un utilisateur doit pouvoir envoyer un nouveau message sur une chatroom
+* [x] Un utilisateur doit recevoir en temps réel les nouveaux messages envoyés dans une chatroom
+* [x] Le status des utilisateurs doit être mis à jour en temps réel dans le chat (actif / déconnecté)
 
 ## Contraintes techniques ##
-* Chaque message doit avoir un ID unique sur la plateforme
-* Chaque nom de chatroom doit être unique
-* Un utilisateur est identifié par son username
+* [x] Chaque message doit avoir un ID unique sur la plateforme
+* [x] Chaque nom de chatroom doit être unique
+* [x] Un utilisateur est identifié par son username
 
 ## Manuel utilisateur ##
 

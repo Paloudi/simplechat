@@ -60,10 +60,9 @@ public class ChatInstance<T> {
         }
         if(IsChatroomUnique(newChatroom.getName(), chatrooms)){
             chatrooms.add(newChatroom);
-            return chatrooms.indexOf(newChatroom);
-        } else {
-            return null;
         }
+
+        return chatrooms.indexOf(newChatroom);
     }
 
     /**
