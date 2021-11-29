@@ -1,8 +1,7 @@
 package chatProject.model.messages;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class MessageTest {
 
@@ -11,7 +10,7 @@ public class MessageTest {
         int id = 42;
         final Message<Object> message = Message.createMessage(id, null, null);
 
-        assertEquals("The message ID is not the one set in the constructor",
+        Assert.assertEquals("The message ID is not the one set in the constructor",
                 id, message.getId());
     }
 
@@ -20,7 +19,7 @@ public class MessageTest {
         String content = "TEST";
         final Message<String> message = Message.createMessage(0, null, content);
 
-        assertEquals("The message content is not the one set in the constructor",
+        Assert.assertEquals("The message content is not the one set in the constructor",
                 content, message.getMessage());
     }
 
