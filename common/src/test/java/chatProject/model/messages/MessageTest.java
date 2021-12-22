@@ -1,10 +1,18 @@
 package chatProject.model.messages;
 
+import chatProject.model.FakeInstances;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MessageTest {
+
+    @Test
+    public void getSender() {
+        final Message<Object> message = Message.createMessage(0, FakeInstances.DUMMY_ACTIVE_USER, null);
+        assertEquals("The message sender is not the one set in the constructor",
+                FakeInstances.DUMMY_ACTIVE_USER, message.getSender());
+    }
 
     @Test
     public void getId() {
@@ -22,6 +30,17 @@ public class MessageTest {
 
         assertEquals("The message content is not the one set in the constructor",
                 content, message.getMessage());
+    }
+
+    @Test
+    public void getToString() {
+        Message<String> message = FakeInstances.DUMMY_MESSAGE_1;
+        String result = "Message{" +
+                "id=" + message.getId() +
+                ", sender=" + message.getSender() +
+                ", content=" + message.getMessage() +
+                '}';
+        assertEquals(result, message.toString());
     }
 
 

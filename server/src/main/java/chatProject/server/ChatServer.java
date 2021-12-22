@@ -11,7 +11,7 @@ import chatProject.model.user.Status;
 import chatProject.model.user.UserAccount;
 import com.google.gson.Gson;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -55,6 +55,11 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     private Thread checkIdleClients = null;
 
+    /**
+     * Tracks if the server is running or not
+     */
+    private boolean running;
+
     //endregion
 
     //region Constructor
@@ -71,6 +76,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
         this.chatInstance = chatInstance;
         this.clientNotifiers = clientNotifiers;
         this.json = json;
+        this.running = false;
     }
 
     //endregion
@@ -83,6 +89,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      * @param json the Json (de)serializer to use
      * @param <T> the type of messages to use
      * @return a new instance of this class to use as a server
+     * @throws IOException not sure when ?
      */
     public static <T> ChatServer<T> initEmptyChat(int socketPort, Gson json) {
 
@@ -97,7 +104,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
             try {
                 server.openSocket(socketPort);
             } catch (IOException e) {
-                throw new RuntimeException("Unable to open new socket on port " + socketPort, e);
+                e.printStackTrace();
             }
         });
 
@@ -117,9 +124,9 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
 
         // open the socket in a try-with-resources (auto close the socket on exit)
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-
+            this.running = true;
             // loop forever to accept all new clients
-            while(true) {
+            while(this.running) {
 
                 // Socket.accept() is blocking - wait for a new client
                 final Socket client = serverSocket.accept();
@@ -168,7 +175,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
     public void close() {
 
         /* 1. we should end infinite loops before closing... */
-
+        this.running = false;
         // 2. terminate all threads :
 
         // cleanly close the check for idle clients
@@ -214,7 +221,6 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
                 .map(UserInfo::getAccount)
                 .filter(account -> account.getUsername().equals(userName))
                 .findAny();
-
     }
 
     /**
@@ -262,13 +268,13 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      * {@inheritDoc}
      */
     @Override
-    public int addChatroom(String chatroomName, UserInfo owner) {
+    public long addChatroom(String chatroomName, UserInfo owner) {
 
         // instantiate the chatroom
         final Chatroom<T> newChatroom = new Chatroom<>(chatroomName, owner, new ArrayList<>());
 
         // add it in the model
-        final int newChatroomId = chatInstance.addChatroom(newChatroom);
+        final long newChatroomId = chatInstance.addChatroom(newChatroom);
 
         if(newChatroomId != -1){
             /* maybe I should notify clients about the new chatroom ?? */
@@ -300,9 +306,8 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     @Override
     public List<Message<T>> getChatroomMessages(int chatroomId) {
-        return Optional.ofNullable(getChatroom(chatroomId))
-                .get()
-                .getCurrentMessages();
+        Optional<Chatroom<T>> optional = Optional.ofNullable(getChatroom(chatroomId));
+        return optional.map(Chatroom::getCurrentMessages).orElse(null);
     }
 
     /**

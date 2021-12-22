@@ -5,11 +5,11 @@ import chatProject.model.messages.Message;
 import chatProject.model.user.Status;
 import chatProject.model.user.UserAccount;
 import chatProject.model.user.UserInfo;
-import junit.framework.TestCase;
+import org.junit.Assert;
 import org.junit.Test;
 
 
-public class ChatServerTest extends TestCase {
+public class ChatServerTest {
 
     /**
      * Test asserting if a new chatroom is created
@@ -17,16 +17,15 @@ public class ChatServerTest extends TestCase {
      */
     @Test
     public void testNotifyNewChatroom() {
-
         //Assert
-        ChatServer server = ChatServer.initEmptyChat(444,null);
+        ChatServer<Object> server = ChatServer.initEmptyChat(25000,null);
         Chatroom<Object> newChatroom = new Chatroom<>("test",null,null);
 
         //Act
-        final Chatroom result = server.notifyNewChatroom(newChatroom);
+        final Chatroom<Object> result = server.notifyNewChatroom(newChatroom);
 
         //Assign
-        assertEquals("The chatroom name is the one set in the constructor",
+        Assert.assertEquals("The chatroom name is the one set in the constructor",
                 newChatroom.getName(), result.getName());
     }
 
@@ -38,14 +37,14 @@ public class ChatServerTest extends TestCase {
     public void testNotifyNewMessage() {
 
         //Assert
-        ChatServer server = ChatServer.initEmptyChat(444, null);
-        Message msg = new Message(1, null,"test");
+        ChatServer<Object> server = ChatServer.initEmptyChat(25001, null);
+        Message<Object> msg = new Message<>(1, null,"test");
 
         //Act
-        final Message result = server.notifyNewMessage(1,msg);
+        final Message<Object> result = server.notifyNewMessage(1,msg);
 
         //Assign
-        assertEquals("The message content is the one set in the constructor",
+        Assert.assertEquals("The message content is the one set in the constructor",
                 msg.getMessage(), result.getMessage());
     }
 
@@ -54,9 +53,8 @@ public class ChatServerTest extends TestCase {
      */
     @Test
     public void testNotifyUserChange_noDuplicatedUser() {
-
         //Assert
-        ChatServer server = ChatServer.initEmptyChat(444, null);
+        ChatServer<Object> server = ChatServer.initEmptyChat(25002, null);
         UserAccount userAccount = new UserAccount(1, "toto");
         UserInfo user = new UserInfo(userAccount, Status.ACTIVE);
 
@@ -64,7 +62,7 @@ public class ChatServerTest extends TestCase {
         final UserInfo result = server.notifyUserChange(user);
 
         //Assign
-        assertEquals("The user name is the one set in the constructor",
+        Assert.assertEquals("The user name is the one set in the constructor",
                 userAccount.getUsername(), result.getAccount().getUsername());
     }
 }

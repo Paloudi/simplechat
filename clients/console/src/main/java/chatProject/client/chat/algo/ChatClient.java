@@ -1,7 +1,7 @@
 package chatProject.client.chat.algo;
 
 import chatProject.AddMessageForm;
-import chatProject.FakeInstances;
+import chatProject.model.FakeInstances;
 import chatProject.algo.ChatroomAlgo;
 import chatProject.algo.MessageAlgo;
 import chatProject.algo.UserAlgo;

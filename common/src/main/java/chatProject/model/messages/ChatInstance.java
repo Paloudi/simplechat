@@ -54,11 +54,11 @@ public class ChatInstance<T> {
      * @param newChatroom the chatroom to add
      * @return the ID of the new chatroom added
      */
-    public Integer addChatroom(Chatroom<T> newChatroom) {
+    public long addChatroom(Chatroom<T> newChatroom) {
         if (null == chatrooms) {
             chatrooms = new LinkedList<>();
         }
-        if(IsChatroomUnique(newChatroom.getName(), chatrooms)){
+        if(isChatroomUnique(newChatroom.getName())){
             chatrooms.add(newChatroom);
         }
 
@@ -70,8 +70,8 @@ public class ChatInstance<T> {
      * @param newUser the user to add
      */
     public boolean addUser(UserInfo newUser) {
-        if (users.get(newUser) != null) {
-            // already found in the model (same account and same status) - no update
+        if (newUser == null || users.get(newUser) != null) {
+            // null or already found in the model (same account and same status) - no update
             return false;
         }
 
@@ -106,24 +106,24 @@ public class ChatInstance<T> {
      * @return the new chat instance
      */
     public static <T> ChatInstance<T> initEmptyChat() {
-        return new ChatInstance<T>(new ArrayList<Chatroom<T>>() { }, new HashMap<>(10));
+        return new ChatInstance<>(new ArrayList<Chatroom<T>>() { }, new HashMap<>(10));
     }
 
     /**
      * Determine if the chatroom name is unique
      * @param chatName new chat room name
-     * @param chatrooms list of existing chat rooms
      * @return boolean
      */
-    private boolean IsChatroomUnique(String chatName, List<Chatroom<T>> chatrooms){
-        boolean isUnique = true;
-        for (Chatroom<T> chatroom: chatrooms) {
+    public boolean isChatroomUnique(String chatName){
+        int isUnique = -1;
+        for (Chatroom<T> chatroom: this.chatrooms) {
             if(chatroom.getName().equalsIgnoreCase(chatName)){
-                isUnique = false;
-                break;
+                isUnique++;
+                if (isUnique > 1)
+                    break;
             }
         }
-        return isUnique;
+        return isUnique <= 0;
     }
 
 }

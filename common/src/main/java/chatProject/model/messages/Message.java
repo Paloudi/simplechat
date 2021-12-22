@@ -23,7 +23,7 @@ public class Message<T> {
     /**
      * The sender of the message.
      */
-    private final MessageOwnerConcrete sender;
+    private final UserInfo sender;
     /**
      * The content of the message.
      */
@@ -49,11 +49,11 @@ public class Message<T> {
             final UserAccount account = new UserAccount(9999, "NULL");
             final UserInfo userInfo = new UserInfo(account, Status.ACTIVE);
             final Status currentStatus = userInfo.getCurrentStatus();
-            this.sender = new MessageOwnerConcrete(account, currentStatus);
+            this.sender = new UserInfo(account, currentStatus);
         } else {
             final UserAccount account = sender.getAccount();
             final Status currentStatus = sender.getCurrentStatus();
-            this.sender = new MessageOwnerConcrete(account, currentStatus);
+            this.sender = new UserInfo(account, currentStatus);
         }
         this.content = content;
     }
@@ -62,7 +62,7 @@ public class Message<T> {
 
     public static <T> Message<T> createMessage(final int id, final UserInfo sender, final T content) {
         Message.logger.info(String.format("New message [ID: %d, sender: %s, content: %s]", id, sender, content));
-        return new Message<T>(id, sender, content);
+        return new Message<>(id, sender, content);
     }
   
     //region Public Getters

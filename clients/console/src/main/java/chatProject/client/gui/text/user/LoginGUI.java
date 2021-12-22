@@ -1,6 +1,6 @@
 package chatProject.client.gui.text.user;
 
-import chatProject.FakeInstances;
+import chatProject.model.FakeInstances;
 import chatProject.client.chat.algo.ChatClient;
 import chatProject.client.gui.text.helpers.GUIHelpers;
 import chatProject.model.user.UserInfo;

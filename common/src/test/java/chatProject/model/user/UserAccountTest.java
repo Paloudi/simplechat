@@ -2,9 +2,16 @@ package chatProject.model.user;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserAccountTest {
+
+    @Test
+    public void getId() {
+        int id = 42;
+        final UserAccount userAccount = new UserAccount(id, "test");
+        assertEquals("The user ID is not the one set in the constructor", id, userAccount.getId());
+    }
 
     @Test
     public void getUsername() {

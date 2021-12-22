@@ -31,6 +31,6 @@ public interface ChatroomAlgo<T> extends ChatroomsListener<T> {
      * @param owner the user who created the chatroom
      * @return the ID of the new chatroom created
      */
-    int addChatroom(String chatroomName, UserInfo owner);
+    long addChatroom(String chatroomName, UserInfo owner);
 
 }

@@ -85,24 +85,13 @@ public class Chatroom<T> {
         return message;
     }
 
-    /**
-     * Stores a new message directly in this chatroom.
-     * @param newMessage the new message to store
-     * @return the new message
-     */
-    public Message<T> addMessage(Message<T> newMessage) {
-        messages.add(newMessage);
-        return newMessage;
-    }
-
     //endregion
 
     @Override
     public String toString() {
-        if (owner == null) {
+        if (owner == null)
             return name;
-        } else {
-            return name + " (" + owner.getAccount() + ')';
-        }
+        return name + " (" + owner.getAccount() + ')';
     }
+
 }

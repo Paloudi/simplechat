@@ -2,15 +2,18 @@ package chatProject.server;
 
 import com.google.gson.Gson;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * The main class for the server instance.
  */
 public class Main {
 
     public static void main(String... args) {
-
+        Logger logger = Logger.getAnonymousLogger();
         if (args.length != 2) {
-            System.err.println("Required arguments : <socket port (listener)> <web server port>");
+            logger.log(Level.SEVERE, "Required arguments : <socket port (listener)> <web server port>");
             System.exit(1);
         }
 
