@@ -24,7 +24,7 @@ public class ChatInstanceTest {
         chatroomList.add(FakeInstances.DUMMY_CHATROOM_2);
         chatroomList.add(FakeInstances.DUMMY_CHATROOM_2);
         chatroomList.add(FakeInstances.DUMMY_CHATROOM_2);
-        ChatInstance<String> chatInstance = new ChatInstance<>(chatroomList, FakeInstances.DUMMY_USERS_MAP);
+        ChatInstance<String> chatInstance = new ChatInstance<>(chatroomList, FakeInstances.DUMMY_CHAT_INSTANCE.getUsers());
         Assert.assertFalse(chatInstance.isChatroomUnique(FakeInstances.DUMMY_CHATROOM_2.getName()));
     }
 

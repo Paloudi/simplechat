@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FakeInstances</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chatProject.model</a>
+</div>
+
+<h1>Coverage Summary for Class: FakeInstances (chatProject.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FakeInstances</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package chatProject.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import chatProject.model.user.Status;
+<i class="no-highlight">4</i>&nbsp;import chatProject.model.user.UserAccount;
+<i class="no-highlight">5</i>&nbsp;import chatProject.model.messages.ChatInstance;
+<i class="no-highlight">6</i>&nbsp;import chatProject.model.messages.Chatroom;
+<i class="no-highlight">7</i>&nbsp;import chatProject.model.messages.Message;
+<i class="no-highlight">8</i>&nbsp;import chatProject.model.user.UserInfo;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;import java.time.LocalTime;
+<i class="no-highlight">11</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">12</i>&nbsp;import java.util.Collections;
+<i class="no-highlight">13</i>&nbsp;import java.util.HashMap;
+<i class="no-highlight">14</i>&nbsp;import java.util.Map;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;import static java.util.Arrays.asList;
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;/**
+<i class="no-highlight">19</i>&nbsp; * This class contains fake instances to be used in the project or in tests.
+<i class="no-highlight">20</i>&nbsp; */
+<i class="no-highlight">21</i>&nbsp;public class FakeInstances {
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    private FakeInstances() {}
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    public static final UserAccount UNKNOWN_USER = new UserAccount(-1, &quot;?&quot;);</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;    public static final UserInfo UNKNOWN_USER_INFO = new UserInfo(UNKNOWN_USER, Status.REVOKED);</b>
+<i class="no-highlight">27</i>&nbsp;
+<b class="fc"><i class="no-highlight">28</i>&nbsp;    public static final UserAccount DUMMY_ACCOUNT_1 = new UserAccount(3, &quot;User1&quot;);</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    public static final UserAccount DUMMY_ACCOUNT_2 = new UserAccount(7, &quot;User2&quot;);</b>
+<i class="no-highlight">30</i>&nbsp;
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    public static final UserInfo DUMMY_ACTIVE_USER = new UserInfo(DUMMY_ACCOUNT_1, Status.ACTIVE);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;    public static final UserInfo DUMMY_LOGOUT_USER = new UserInfo(DUMMY_ACCOUNT_2, Status.INACTIVE);</b>
+<i class="no-highlight">33</i>&nbsp;
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    protected static final Map&lt;UserInfo, LocalTime&gt; DUMMY_USERS_MAP = new HashMap&lt;&gt;();</b>
+<i class="no-highlight">35</i>&nbsp;    static {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        DUMMY_USERS_MAP.put(DUMMY_ACTIVE_USER, LocalTime.now());</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        DUMMY_USERS_MAP.put(DUMMY_LOGOUT_USER, LocalTime.now());</b>
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    public static final Message&lt;String&gt; DUMMY_MESSAGE_1 =</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            Message.createMessage(0, DUMMY_ACTIVE_USER, &quot;Hello&quot;);</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public static final Message&lt;String&gt; DUMMY_MESSAGE_2 =</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            Message.createMessage(1, DUMMY_LOGOUT_USER, &quot;Bye&quot;);</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="fc"><i class="no-highlight">45</i>&nbsp;    public static final Chatroom&lt;String&gt; DUMMY_CHATROOM_1 =</b>
+<i class="no-highlight">46</i>&nbsp;            new Chatroom&lt;&gt;(
+<i class="no-highlight">47</i>&nbsp;                    &quot;ROOM 1&quot;,
+<i class="no-highlight">48</i>&nbsp;                    DUMMY_ACTIVE_USER,
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    new ArrayList&lt;&gt;(Collections.singletonList(DUMMY_MESSAGE_2))</b>
+<i class="no-highlight">50</i>&nbsp;            );
+<b class="fc"><i class="no-highlight">51</i>&nbsp;    public static final Chatroom&lt;String&gt; DUMMY_CHATROOM_2 =</b>
+<i class="no-highlight">52</i>&nbsp;            new Chatroom&lt;&gt;(
+<i class="no-highlight">53</i>&nbsp;                    &quot;ROOM 2&quot;,
+<i class="no-highlight">54</i>&nbsp;                    DUMMY_LOGOUT_USER,
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                    new ArrayList&lt;&gt;(asList(DUMMY_MESSAGE_1, DUMMY_MESSAGE_2))</b>
+<i class="no-highlight">56</i>&nbsp;            );
+<i class="no-highlight">57</i>&nbsp;
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    public static final ChatInstance&lt;String&gt; DUMMY_CHAT_INSTANCE =</b>
+<i class="no-highlight">59</i>&nbsp;            new ChatInstance&lt;&gt;(
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                    new ArrayList&lt;&gt;(asList(DUMMY_CHATROOM_1, DUMMY_CHATROOM_2)),</b>
+<i class="no-highlight">61</i>&nbsp;                    DUMMY_USERS_MAP
+<i class="no-highlight">62</i>&nbsp;                    );
+<i class="no-highlight">63</i>&nbsp;
+<i class="no-highlight">64</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-22 14:02</div>
+</div>
+</body>
+</html>

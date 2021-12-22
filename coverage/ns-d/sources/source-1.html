@@ -1,0 +1,102 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > MessageAlgo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chatProject.algo</a>
+</div>
+
+<h1>Coverage Summary for Class: MessageAlgo (chatProject.algo)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">MessageAlgo$addMessage</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package chatProject.algo;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import chatProject.model.listener.MessageListener;
+<i class="no-highlight">4</i>&nbsp;import chatProject.model.messages.Message;
+<i class="no-highlight">5</i>&nbsp;import chatProject.model.user.UserInfo;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import java.util.List;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;/**
+<i class="no-highlight">10</i>&nbsp; * The algorithms to manage {@link Message}s.
+<i class="no-highlight">11</i>&nbsp; * @param &lt;T&gt; the type of messages in the chat
+<i class="no-highlight">12</i>&nbsp; */
+<i class="no-highlight">13</i>&nbsp;public interface MessageAlgo&lt;T&gt; extends MessageListener&lt;T&gt; {
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /**
+<i class="no-highlight">16</i>&nbsp;     * Adds a new {@link Message} in the model and notifies clients about it.
+<i class="no-highlight">17</i>&nbsp;     * @param chatroomId the ID of the chatroom that contains the message
+<i class="no-highlight">18</i>&nbsp;     * @param user the use who sent the message
+<i class="no-highlight">19</i>&nbsp;     * @param content the content of the message
+<i class="no-highlight">20</i>&nbsp;     * @return the new message added to the model
+<i class="no-highlight">21</i>&nbsp;     */
+<i class="no-highlight">22</i>&nbsp;    Message&lt;T&gt; addMessage(int chatroomId, UserInfo user, T content);
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;    /**
+<i class="no-highlight">25</i>&nbsp;     * Gets the list of messages in a chatroom.
+<i class="no-highlight">26</i>&nbsp;     * @param chatroomId the ID of the chatroom to query
+<i class="no-highlight">27</i>&nbsp;     * @return the list of messages in this chatroom
+<i class="no-highlight">28</i>&nbsp;     */
+<i class="no-highlight">29</i>&nbsp;    List&lt;Message&lt;T&gt;&gt; getChatroomMessages(int chatroomId);
+<i class="no-highlight">30</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-22 14:02</div>
+</div>
+</body>
+</html>

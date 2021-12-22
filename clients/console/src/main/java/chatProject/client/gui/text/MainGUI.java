@@ -24,13 +24,12 @@ public class MainGUI implements Closeable {
 
         DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
 
-        Screen screen = defaultTerminalFactory.createScreen();
-        screen.startScreen();
-
-        final MultiWindowTextGUI textGUI = new MultiWindowTextGUI(screen);
-        LoginGUI.init(chat, textGUI);
-
-        return new MainGUI(screen);
+        try (Screen screen = defaultTerminalFactory.createScreen()) {
+            screen.startScreen();
+            final MultiWindowTextGUI textGUI = new MultiWindowTextGUI(screen);
+            LoginGUI.init(chat, textGUI);
+            return new MainGUI(screen);
+        }
     }
 
     @Override

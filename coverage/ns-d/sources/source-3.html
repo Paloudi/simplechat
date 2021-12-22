@@ -1,0 +1,108 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ChatroomAlgo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chatProject.algo</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatroomAlgo (chatProject.algo)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ChatroomAlgo$addChatroom</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package chatProject.algo;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import chatProject.model.listener.ChatroomsListener;
+<i class="no-highlight">4</i>&nbsp;import chatProject.model.messages.Chatroom;
+<i class="no-highlight">5</i>&nbsp;import chatProject.model.user.UserInfo;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import java.util.List;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;/**
+<i class="no-highlight">10</i>&nbsp; * The algorithm to manage {@link Chatroom}s.
+<i class="no-highlight">11</i>&nbsp; * @param &lt;T&gt; the type of messages in the chat
+<i class="no-highlight">12</i>&nbsp; */
+<i class="no-highlight">13</i>&nbsp;public interface ChatroomAlgo&lt;T&gt; extends ChatroomsListener&lt;T&gt; {
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /**
+<i class="no-highlight">16</i>&nbsp;     * Gets the list of all {@link Chatroom}s.
+<i class="no-highlight">17</i>&nbsp;     * @return the names of all chatrooms in the model
+<i class="no-highlight">18</i>&nbsp;     */
+<i class="no-highlight">19</i>&nbsp;    List&lt;String&gt; getCurrentChatroomNames();
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;    /**
+<i class="no-highlight">22</i>&nbsp;     * Gets the model of a chatroom given its ID.
+<i class="no-highlight">23</i>&nbsp;     * @param chatroomId the chatroom ID
+<i class="no-highlight">24</i>&nbsp;     * @return the model of the chatroom
+<i class="no-highlight">25</i>&nbsp;     */
+<i class="no-highlight">26</i>&nbsp;    Chatroom&lt;T&gt; getChatroom(int chatroomId);
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    /**
+<i class="no-highlight">29</i>&nbsp;     * Adds a new {@link Chatroom} in the model and notifies clients about it.
+<i class="no-highlight">30</i>&nbsp;     * @param chatroomName the name of the chatroom to create
+<i class="no-highlight">31</i>&nbsp;     * @param owner the user who created the chatroom
+<i class="no-highlight">32</i>&nbsp;     * @return the new chatroom ID
+<i class="no-highlight">33</i>&nbsp;     */
+<i class="no-highlight">34</i>&nbsp;    int addChatroom(String chatroomName, UserInfo owner);
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-22 14:02</div>
+</div>
+</body>
+</html>

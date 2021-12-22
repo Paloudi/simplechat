@@ -1,0 +1,559 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ChatClient</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chatProject.client.chat.algo</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatClient (chatProject.client.chat.algo)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatClient</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/102)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ChatClient$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ChatClient$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ChatClient$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ChatClient$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ChatClient$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/107)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package chatProject.client.chat.algo;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import chatProject.AddMessageForm;
+<i class="no-highlight">4</i>&nbsp;import chatProject.model.FakeInstances;
+<i class="no-highlight">5</i>&nbsp;import chatProject.algo.ChatroomAlgo;
+<i class="no-highlight">6</i>&nbsp;import chatProject.algo.MessageAlgo;
+<i class="no-highlight">7</i>&nbsp;import chatProject.algo.UserAlgo;
+<i class="no-highlight">8</i>&nbsp;import chatProject.model.listener.ChatroomsListener;
+<i class="no-highlight">9</i>&nbsp;import chatProject.model.listener.MessageListener;
+<i class="no-highlight">10</i>&nbsp;import chatProject.model.listener.UserListener;
+<i class="no-highlight">11</i>&nbsp;import chatProject.model.messages.ChatInstance;
+<i class="no-highlight">12</i>&nbsp;import chatProject.model.messages.Chatroom;
+<i class="no-highlight">13</i>&nbsp;import chatProject.model.messages.Message;
+<i class="no-highlight">14</i>&nbsp;import chatProject.model.user.UserInfo;
+<i class="no-highlight">15</i>&nbsp;import com.google.gson.Gson;
+<i class="no-highlight">16</i>&nbsp;import com.google.gson.reflect.TypeToken;
+<i class="no-highlight">17</i>&nbsp;import org.apache.http.client.fluent.Request;
+<i class="no-highlight">18</i>&nbsp;import org.apache.http.entity.ContentType;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">21</i>&nbsp;import java.lang.reflect.Type;
+<i class="no-highlight">22</i>&nbsp;import java.util.*;
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;public class ChatClient&lt;T&gt; implements UserAlgo, ChatroomAlgo&lt;T&gt;, MessageAlgo&lt;T&gt;, AutoCloseable {
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    private final ChatInstance&lt;T&gt; chatInstance;
+<i class="no-highlight">27</i>&nbsp;    private UserInfo currentUser;
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    private final Map&lt;Integer, Collection&lt;MessageListener&lt;T&gt;&gt;&gt; messageListeners;
+<i class="no-highlight">30</i>&nbsp;    private final Collection&lt;ChatroomsListener&lt;T&gt;&gt; chatroomListeners;
+<i class="no-highlight">31</i>&nbsp;    private final Collection&lt;UserListener&gt; usersListeners;
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    private final String serverUrl;
+<i class="no-highlight">34</i>&nbsp;
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    private final Gson json = new Gson();</b>
+<i class="no-highlight">36</i>&nbsp;
+<b class="nc"><i class="no-highlight">37</i>&nbsp;    private SocketReader&lt;T&gt; socketListener = null;</b>
+<i class="no-highlight">38</i>&nbsp;
+<b class="nc"><i class="no-highlight">39</i>&nbsp;    private Thread pingThread = null;</b>
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    public ChatClient(ChatInstance&lt;T&gt; chatInstance,
+<i class="no-highlight">42</i>&nbsp;                      UserInfo currentUser,
+<i class="no-highlight">43</i>&nbsp;                      Map&lt;Integer, Collection&lt;MessageListener&lt;T&gt;&gt;&gt; messageListeners,
+<i class="no-highlight">44</i>&nbsp;                      Collection&lt;ChatroomsListener&lt;T&gt;&gt; chatroomListeners,
+<i class="no-highlight">45</i>&nbsp;                      Collection&lt;UserListener&gt; usersListeners,
+<b class="nc"><i class="no-highlight">46</i>&nbsp;                      String serverUrl) {</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        this.chatInstance = chatInstance;</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;        this.currentUser = currentUser;</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;        this.messageListeners = messageListeners;</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        this.chatroomListeners = chatroomListeners;</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        this.usersListeners = usersListeners;</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        this.serverUrl = serverUrl;</b>
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;    public static &lt;T&gt; ChatClient&lt;T&gt; initEmptyChat(
+<i class="no-highlight">56</i>&nbsp;            String hostname,
+<i class="no-highlight">57</i>&nbsp;            int webServerPort,
+<i class="no-highlight">58</i>&nbsp;            int socketPort) {
+<i class="no-highlight">59</i>&nbsp;
+<b class="nc"><i class="no-highlight">60</i>&nbsp;        final String serverUrl = &quot;http://&quot; + hostname + &#39;:&#39; + webServerPort + &#39;/&#39;;</b>
+<i class="no-highlight">61</i>&nbsp;
+<b class="nc"><i class="no-highlight">62</i>&nbsp;        final ChatClient&lt;T&gt; client = new ChatClient&lt;&gt;(</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;                ChatInstance.initEmptyChat(),</b>
+<i class="no-highlight">64</i>&nbsp;                FakeInstances.UNKNOWN_USER_INFO,
+<i class="no-highlight">65</i>&nbsp;                new HashMap&lt;&gt;(),
+<i class="no-highlight">66</i>&nbsp;                new HashSet&lt;&gt;(),
+<i class="no-highlight">67</i>&nbsp;                new HashSet&lt;&gt;(),
+<i class="no-highlight">68</i>&nbsp;                serverUrl
+<i class="no-highlight">69</i>&nbsp;        );
+<i class="no-highlight">70</i>&nbsp;
+<b class="nc"><i class="no-highlight">71</i>&nbsp;        client.socketListener = new SocketReader&lt;&gt; (</b>
+<i class="no-highlight">72</i>&nbsp;                hostname,
+<i class="no-highlight">73</i>&nbsp;                socketPort,
+<i class="no-highlight">74</i>&nbsp;                client,
+<i class="no-highlight">75</i>&nbsp;                client.json
+<i class="no-highlight">76</i>&nbsp;        );
+<b class="nc"><i class="no-highlight">77</i>&nbsp;        client.socketListener.start();</b>
+<i class="no-highlight">78</i>&nbsp;
+<b class="nc"><i class="no-highlight">79</i>&nbsp;        client.pingThread = new Thread(() -&gt; {</b>
+<i class="no-highlight">80</i>&nbsp;            while(true) {
+<i class="no-highlight">81</i>&nbsp;                try {
+<b class="nc"><i class="no-highlight">82</i>&nbsp;                    Thread.sleep(1000); // ping every 1s</b>
+<b class="nc"><i class="no-highlight">83</i>&nbsp;                    if (client.currentUser != null</b>
+<b class="nc"><i class="no-highlight">84</i>&nbsp;                            &amp;&amp; !client.currentUser.equals(FakeInstances.UNKNOWN_USER_INFO)) {</b>
+<b class="nc"><i class="no-highlight">85</i>&nbsp;                        client.login(client.currentUser.getAccount().getUsername());</b>
+<i class="no-highlight">86</i>&nbsp;                    }
+<b class="nc"><i class="no-highlight">87</i>&nbsp;                } catch (InterruptedException e) {</b>
+<i class="no-highlight">88</i>&nbsp;                    // interrupted
+<b class="nc"><i class="no-highlight">89</i>&nbsp;                    break;</b>
+<b class="nc"><i class="no-highlight">90</i>&nbsp;                }</b>
+<i class="no-highlight">91</i>&nbsp;            }
+<i class="no-highlight">92</i>&nbsp;        });
+<b class="nc"><i class="no-highlight">93</i>&nbsp;        client.pingThread.start();</b>
+<i class="no-highlight">94</i>&nbsp;
+<b class="nc"><i class="no-highlight">95</i>&nbsp;        return client;</b>
+<i class="no-highlight">96</i>&nbsp;    }
+<i class="no-highlight">97</i>&nbsp;
+<i class="no-highlight">98</i>&nbsp;    @Override
+<i class="no-highlight">99</i>&nbsp;    public void close() throws IOException {
+<i class="no-highlight">100</i>&nbsp;        // close all threads on exit
+<i class="no-highlight">101</i>&nbsp;
+<b class="nc"><i class="no-highlight">102</i>&nbsp;        pingThread.interrupt();</b>
+<i class="no-highlight">103</i>&nbsp;        // cleanly close the socket on exit
+<b class="nc"><i class="no-highlight">104</i>&nbsp;        socketListener.closeSocket();</b>
+<b class="nc"><i class="no-highlight">105</i>&nbsp;        socketListener.interrupt();</b>
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;    /* **************************** User part *********************/
+<i class="no-highlight">109</i>&nbsp;
+<i class="no-highlight">110</i>&nbsp;    /**
+<i class="no-highlight">111</i>&nbsp;     * Gets the current user of the client.
+<i class="no-highlight">112</i>&nbsp;     * @return the current user in the class
+<i class="no-highlight">113</i>&nbsp;     */
+<i class="no-highlight">114</i>&nbsp;    public UserInfo getCurrentUser() {
+<b class="nc"><i class="no-highlight">115</i>&nbsp;        return currentUser;</b>
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<i class="no-highlight">118</i>&nbsp;    /**
+<i class="no-highlight">119</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">120</i>&nbsp;     */
+<i class="no-highlight">121</i>&nbsp;    @Override
+<i class="no-highlight">122</i>&nbsp;    public UserInfo login(String userName) {
+<i class="no-highlight">123</i>&nbsp;
+<i class="no-highlight">124</i>&nbsp;        final String response;
+<i class="no-highlight">125</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">126</i>&nbsp;            response = Request.Post(serverUrl + &quot;/login&quot;).bodyByteArray(userName.getBytes())</b>
+<b class="nc"><i class="no-highlight">127</i>&nbsp;                    .execute().returnContent().asString();</b>
+<b class="nc"><i class="no-highlight">128</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">129</i>&nbsp;            System.err.println(&quot;Cannot login &quot; + userName);</b>
+<b class="nc"><i class="no-highlight">130</i>&nbsp;            return FakeInstances.UNKNOWN_USER_INFO;</b>
+<b class="nc"><i class="no-highlight">131</i>&nbsp;        }</b>
+<i class="no-highlight">132</i>&nbsp;
+<b class="nc"><i class="no-highlight">133</i>&nbsp;        final UserInfo user =</b>
+<b class="nc"><i class="no-highlight">134</i>&nbsp;                Optional.ofNullable(response)</b>
+<b class="nc"><i class="no-highlight">135</i>&nbsp;                        .map(resp -&gt; json.fromJson(resp, UserInfo.class))</b>
+<b class="nc"><i class="no-highlight">136</i>&nbsp;                        .orElse(FakeInstances.UNKNOWN_USER_INFO);</b>
+<b class="nc"><i class="no-highlight">137</i>&nbsp;        this.currentUser = user;</b>
+<b class="nc"><i class="no-highlight">138</i>&nbsp;        return user;</b>
+<i class="no-highlight">139</i>&nbsp;    }
+<i class="no-highlight">140</i>&nbsp;
+<i class="no-highlight">141</i>&nbsp;
+<i class="no-highlight">142</i>&nbsp;    /**
+<i class="no-highlight">143</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">144</i>&nbsp;     */
+<i class="no-highlight">145</i>&nbsp;    @Override
+<i class="no-highlight">146</i>&nbsp;    public Collection&lt;UserInfo&gt; getUsers() {
+<i class="no-highlight">147</i>&nbsp;
+<i class="no-highlight">148</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">149</i>&nbsp;            final String response = Request.Get(serverUrl + &quot;/users&quot;)</b>
+<b class="nc"><i class="no-highlight">150</i>&nbsp;                    .execute().returnContent().asString();</b>
+<i class="no-highlight">151</i>&nbsp;
+<i class="no-highlight">152</i>&nbsp;            // we need a Type token to deserialize a list with a parametrized type
+<i class="no-highlight">153</i>&nbsp;            // avoids cast issues from Tree to concrete class
+<b class="nc"><i class="no-highlight">154</i>&nbsp;            Type listOfUsers = new TypeToken&lt;Collection&lt;UserInfo&gt;&gt;() {}.getType();</b>
+<b class="nc"><i class="no-highlight">155</i>&nbsp;            return json.fromJson(response, listOfUsers);</b>
+<b class="nc"><i class="no-highlight">156</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">157</i>&nbsp;            throw new RuntimeException(&quot;Cannot get users&quot;, e);</b>
+<i class="no-highlight">158</i>&nbsp;        }
+<i class="no-highlight">159</i>&nbsp;    }
+<i class="no-highlight">160</i>&nbsp;
+<i class="no-highlight">161</i>&nbsp;    /**
+<i class="no-highlight">162</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">163</i>&nbsp;     */
+<i class="no-highlight">164</i>&nbsp;    @Override
+<i class="no-highlight">165</i>&nbsp;    public UserInfo notifyUserChange(UserInfo user) {
+<b class="nc"><i class="no-highlight">166</i>&nbsp;        if (chatInstance.addUser(user)) {</b>
+<b class="nc"><i class="no-highlight">167</i>&nbsp;            usersListeners.forEach(</b>
+<b class="nc"><i class="no-highlight">168</i>&nbsp;                    userListener -&gt; userListener.notifyUserChange(user)</b>
+<i class="no-highlight">169</i>&nbsp;            );
+<i class="no-highlight">170</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">171</i>&nbsp;        return user;</b>
+<i class="no-highlight">172</i>&nbsp;    }
+<i class="no-highlight">173</i>&nbsp;
+<i class="no-highlight">174</i>&nbsp;    /**
+<i class="no-highlight">175</i>&nbsp;     * Adds a new listener on user changes.
+<i class="no-highlight">176</i>&nbsp;     * @param listener the listener to add
+<i class="no-highlight">177</i>&nbsp;     */
+<i class="no-highlight">178</i>&nbsp;    public void addUserListener(UserListener listener) {
+<b class="nc"><i class="no-highlight">179</i>&nbsp;        usersListeners.add(listener);</b>
+<i class="no-highlight">180</i>&nbsp;    }
+<i class="no-highlight">181</i>&nbsp;
+<i class="no-highlight">182</i>&nbsp;    /* **************************** Chatroom part *********************/
+<i class="no-highlight">183</i>&nbsp;
+<i class="no-highlight">184</i>&nbsp;    /**
+<i class="no-highlight">185</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">186</i>&nbsp;     */
+<i class="no-highlight">187</i>&nbsp;    @Override
+<i class="no-highlight">188</i>&nbsp;    public List&lt;String&gt; getCurrentChatroomNames() {
+<i class="no-highlight">189</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">190</i>&nbsp;            Type listOfString = new TypeToken&lt;List&lt;String&gt;&gt;() {}.getType();</b>
+<b class="nc"><i class="no-highlight">191</i>&nbsp;            return json.fromJson(</b>
+<b class="nc"><i class="no-highlight">192</i>&nbsp;                    Request.Get(serverUrl + &quot;/chatrooms&quot;)</b>
+<b class="nc"><i class="no-highlight">193</i>&nbsp;                            .execute().returnContent().asString(),</b>
+<i class="no-highlight">194</i>&nbsp;                    listOfString);
+<b class="nc"><i class="no-highlight">195</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">196</i>&nbsp;            throw new RuntimeException(&quot;Cannot get chatroom names&quot;, e);</b>
+<i class="no-highlight">197</i>&nbsp;        }
+<i class="no-highlight">198</i>&nbsp;    }
+<i class="no-highlight">199</i>&nbsp;
+<i class="no-highlight">200</i>&nbsp;    /**
+<i class="no-highlight">201</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">202</i>&nbsp;     */
+<i class="no-highlight">203</i>&nbsp;    @Override
+<i class="no-highlight">204</i>&nbsp;    public Chatroom&lt;T&gt; getChatroom(int chatroomId) {
+<i class="no-highlight">205</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">206</i>&nbsp;            Type chatroomT = new TypeToken&lt;Chatroom&lt;T&gt;&gt;() {}.getType();</b>
+<b class="nc"><i class="no-highlight">207</i>&nbsp;            return json.fromJson(</b>
+<b class="nc"><i class="no-highlight">208</i>&nbsp;                    Request.Get(serverUrl + &quot;/chatroom/&quot; + chatroomId)</b>
+<b class="nc"><i class="no-highlight">209</i>&nbsp;                            .execute().returnContent().asString(),</b>
+<i class="no-highlight">210</i>&nbsp;                    chatroomT);
+<b class="nc"><i class="no-highlight">211</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">212</i>&nbsp;            throw new RuntimeException(&quot;Cannot get chatroom &quot; + chatroomId, e);</b>
+<i class="no-highlight">213</i>&nbsp;        }
+<i class="no-highlight">214</i>&nbsp;    }
+<i class="no-highlight">215</i>&nbsp;
+<i class="no-highlight">216</i>&nbsp;    /**
+<i class="no-highlight">217</i>&nbsp;     * Gets the name of a chatroom given its ID.
+<i class="no-highlight">218</i>&nbsp;     * @param chatroomId the chatroom ID
+<i class="no-highlight">219</i>&nbsp;     * @return the chatroom name
+<i class="no-highlight">220</i>&nbsp;     */
+<i class="no-highlight">221</i>&nbsp;    public String getChatroomName(int chatroomId) {
+<b class="nc"><i class="no-highlight">222</i>&nbsp;        return getChatroom(chatroomId).getName();</b>
+<i class="no-highlight">223</i>&nbsp;    }
+<i class="no-highlight">224</i>&nbsp;
+<i class="no-highlight">225</i>&nbsp;    /**
+<i class="no-highlight">226</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">227</i>&nbsp;     */
+<i class="no-highlight">228</i>&nbsp;    @Override
+<i class="no-highlight">229</i>&nbsp;    public int addChatroom(String chatroomName, UserInfo owner) {
+<i class="no-highlight">230</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">231</i>&nbsp;            final String response = Request.Put(serverUrl + &quot;/chatroom/&quot; + chatroomName).bodyString(</b>
+<b class="nc"><i class="no-highlight">232</i>&nbsp;                    json.toJson(owner),</b>
+<i class="no-highlight">233</i>&nbsp;                    ContentType.APPLICATION_JSON
+<b class="nc"><i class="no-highlight">234</i>&nbsp;            ).execute().returnContent().asString();</b>
+<b class="nc"><i class="no-highlight">235</i>&nbsp;            return json.fromJson(response, Integer.class);</b>
+<b class="nc"><i class="no-highlight">236</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">237</i>&nbsp;            System.err.println(&quot;Cannot add chatroom&quot;);</b>
+<b class="nc"><i class="no-highlight">238</i>&nbsp;            return -1;</b>
+<i class="no-highlight">239</i>&nbsp;        }
+<i class="no-highlight">240</i>&nbsp;    }
+<i class="no-highlight">241</i>&nbsp;
+<i class="no-highlight">242</i>&nbsp;    /**
+<i class="no-highlight">243</i>&nbsp;     * Creates a new chatroom using the current user of the client as the owner.
+<i class="no-highlight">244</i>&nbsp;     * @param chatroomName the name of the chatroom to create
+<i class="no-highlight">245</i>&nbsp;     */
+<i class="no-highlight">246</i>&nbsp;    public void createChatroomFromCurrentUser(String chatroomName) {
+<b class="nc"><i class="no-highlight">247</i>&nbsp;        addChatroom(chatroomName, currentUser);</b>
+<i class="no-highlight">248</i>&nbsp;    }
+<i class="no-highlight">249</i>&nbsp;
+<i class="no-highlight">250</i>&nbsp;    /**
+<i class="no-highlight">251</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">252</i>&nbsp;     */
+<i class="no-highlight">253</i>&nbsp;    @Override
+<i class="no-highlight">254</i>&nbsp;    public Chatroom&lt;T&gt; notifyNewChatroom(Chatroom&lt;T&gt; newChatroom) {
+<b class="nc"><i class="no-highlight">255</i>&nbsp;        chatroomListeners.forEach(</b>
+<b class="nc"><i class="no-highlight">256</i>&nbsp;                listener -&gt; listener.notifyNewChatroom(newChatroom)</b>
+<i class="no-highlight">257</i>&nbsp;        );
+<b class="nc"><i class="no-highlight">258</i>&nbsp;        return newChatroom;</b>
+<i class="no-highlight">259</i>&nbsp;    }
+<i class="no-highlight">260</i>&nbsp;
+<i class="no-highlight">261</i>&nbsp;    /**
+<i class="no-highlight">262</i>&nbsp;     * Adds a new listener on chatroom changes.
+<i class="no-highlight">263</i>&nbsp;     * @param listener the listener to add
+<i class="no-highlight">264</i>&nbsp;     */
+<i class="no-highlight">265</i>&nbsp;    public void addChatroomListener(ChatroomsListener&lt;T&gt; listener) {
+<b class="nc"><i class="no-highlight">266</i>&nbsp;        chatroomListeners.add(listener);</b>
+<i class="no-highlight">267</i>&nbsp;    }
+<i class="no-highlight">268</i>&nbsp;
+<i class="no-highlight">269</i>&nbsp;    /* **************************** Messages part *********************/
+<i class="no-highlight">270</i>&nbsp;
+<i class="no-highlight">271</i>&nbsp;    /**
+<i class="no-highlight">272</i>&nbsp;     * Sends a new message in a chatroom using the current user of the client.
+<i class="no-highlight">273</i>&nbsp;     * @param chatroomId the ID of the chatroom where the message is sent
+<i class="no-highlight">274</i>&nbsp;     * @param message the content of the message to send
+<i class="no-highlight">275</i>&nbsp;     */
+<i class="no-highlight">276</i>&nbsp;    public void sendMessageForCurrentUser(int chatroomId, T message) {
+<b class="nc"><i class="no-highlight">277</i>&nbsp;        addMessage(chatroomId, currentUser, message);</b>
+<i class="no-highlight">278</i>&nbsp;    }
+<i class="no-highlight">279</i>&nbsp;
+<i class="no-highlight">280</i>&nbsp;    /**
+<i class="no-highlight">281</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">282</i>&nbsp;     */
+<i class="no-highlight">283</i>&nbsp;    @Override
+<i class="no-highlight">284</i>&nbsp;    public Message&lt;T&gt; addMessage(int chatroomId, UserInfo currentUser, T content) {
+<i class="no-highlight">285</i>&nbsp;
+<i class="no-highlight">286</i>&nbsp;        final String response;
+<i class="no-highlight">287</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">288</i>&nbsp;            response = Request.Put(serverUrl + &quot;/message&quot;)</b>
+<b class="nc"><i class="no-highlight">289</i>&nbsp;                    .bodyString(</b>
+<b class="nc"><i class="no-highlight">290</i>&nbsp;                            json.toJson(new AddMessageForm&lt;&gt;(chatroomId, currentUser, content.toString())),</b>
+<i class="no-highlight">291</i>&nbsp;                            ContentType.APPLICATION_JSON
+<b class="nc"><i class="no-highlight">292</i>&nbsp;                    ).execute().returnContent().asString();</b>
+<b class="nc"><i class="no-highlight">293</i>&nbsp;            Type messageT = new TypeToken&lt;Message&lt;T&gt;&gt;() {}.getType();</b>
+<b class="nc"><i class="no-highlight">294</i>&nbsp;            return json.fromJson(response, messageT);</b>
+<b class="nc"><i class="no-highlight">295</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">296</i>&nbsp;            throw new RuntimeException(</b>
+<i class="no-highlight">297</i>&nbsp;                    &quot;Unable to add the message in chatroom &quot; + chatroomId
+<i class="no-highlight">298</i>&nbsp;                            + &quot; for user &quot; + currentUser
+<i class="no-highlight">299</i>&nbsp;                            + &quot; with content &quot; + content,
+<i class="no-highlight">300</i>&nbsp;                    e);
+<i class="no-highlight">301</i>&nbsp;        }
+<i class="no-highlight">302</i>&nbsp;    }
+<i class="no-highlight">303</i>&nbsp;
+<i class="no-highlight">304</i>&nbsp;    /**
+<i class="no-highlight">305</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">306</i>&nbsp;     */
+<i class="no-highlight">307</i>&nbsp;    @Override
+<i class="no-highlight">308</i>&nbsp;    public List&lt;Message&lt;T&gt;&gt; getChatroomMessages(int chatroomId) {
+<i class="no-highlight">309</i>&nbsp;
+<i class="no-highlight">310</i>&nbsp;        final String response;
+<i class="no-highlight">311</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">312</i>&nbsp;            response = Request.Get(serverUrl + &quot;/messages/&quot; + chatroomId)</b>
+<b class="nc"><i class="no-highlight">313</i>&nbsp;                    .execute().returnContent().asString();</b>
+<i class="no-highlight">314</i>&nbsp;
+<i class="no-highlight">315</i>&nbsp;            // we need a Type token to deserialize a list with a parametrized type
+<i class="no-highlight">316</i>&nbsp;            // avoids cast issues from Tree to concrete class
+<b class="nc"><i class="no-highlight">317</i>&nbsp;            Type listOfMessages = new TypeToken&lt;List&lt;Message&lt;T&gt;&gt;&gt;() {}.getType();</b>
+<b class="nc"><i class="no-highlight">318</i>&nbsp;            return json.fromJson(response, listOfMessages);</b>
+<b class="nc"><i class="no-highlight">319</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">320</i>&nbsp;            throw new RuntimeException(&quot;Cannot get chatroom messages for &quot; + chatroomId, e);</b>
+<i class="no-highlight">321</i>&nbsp;        }
+<i class="no-highlight">322</i>&nbsp;    }
+<i class="no-highlight">323</i>&nbsp;
+<i class="no-highlight">324</i>&nbsp;    /**
+<i class="no-highlight">325</i>&nbsp;     * {@inheritDoc}
+<i class="no-highlight">326</i>&nbsp;     */
+<i class="no-highlight">327</i>&nbsp;    @Override
+<i class="no-highlight">328</i>&nbsp;    public Message&lt;T&gt; notifyNewMessage(int chatroomId, Message&lt;T&gt; message) {
+<b class="nc"><i class="no-highlight">329</i>&nbsp;        Optional.ofNullable(</b>
+<b class="nc"><i class="no-highlight">330</i>&nbsp;                messageListeners.get(chatroomId)</b>
+<b class="nc"><i class="no-highlight">331</i>&nbsp;        ).ifPresent(listeners -&gt; listeners.forEach(</b>
+<b class="nc"><i class="no-highlight">332</i>&nbsp;                listener -&gt; listener.notifyNewMessage(chatroomId, message)</b>
+<i class="no-highlight">333</i>&nbsp;                )
+<i class="no-highlight">334</i>&nbsp;        );
+<b class="nc"><i class="no-highlight">335</i>&nbsp;        return message;</b>
+<i class="no-highlight">336</i>&nbsp;    }
+<i class="no-highlight">337</i>&nbsp;
+<i class="no-highlight">338</i>&nbsp;    /**
+<i class="no-highlight">339</i>&nbsp;     * Adds a new listener on message changes in a chatroom.
+<i class="no-highlight">340</i>&nbsp;     * @param chatroomId the chatroom to listen to
+<i class="no-highlight">341</i>&nbsp;     * @param listener the listener to add
+<i class="no-highlight">342</i>&nbsp;     */
+<i class="no-highlight">343</i>&nbsp;    public void addMessageListener(int chatroomId, MessageListener&lt;T&gt; listener) {
+<b class="nc"><i class="no-highlight">344</i>&nbsp;        final Collection&lt;MessageListener&lt;T&gt;&gt; currentListeners =</b>
+<b class="nc"><i class="no-highlight">345</i>&nbsp;                Optional.ofNullable(this.messageListeners.get(chatroomId))</b>
+<b class="nc"><i class="no-highlight">346</i>&nbsp;                        .orElseGet(HashSet::new);</b>
+<i class="no-highlight">347</i>&nbsp;
+<b class="nc"><i class="no-highlight">348</i>&nbsp;        currentListeners.add(listener);</b>
+<b class="nc"><i class="no-highlight">349</i>&nbsp;        messageListeners.put(chatroomId, currentListeners);</b>
+<i class="no-highlight">350</i>&nbsp;    }
+<i class="no-highlight">351</i>&nbsp;
+<i class="no-highlight">352</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-22 14:02</div>
+</div>
+</body>
+</html>

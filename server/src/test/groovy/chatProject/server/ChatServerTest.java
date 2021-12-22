@@ -8,6 +8,8 @@ import chatProject.model.user.UserInfo;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Optional;
+
 
 public class ChatServerTest {
 
@@ -64,5 +66,70 @@ public class ChatServerTest {
         //Assign
         Assert.assertEquals("The user name is the one set in the constructor",
                 userAccount.getUsername(), result.getAccount().getUsername());
+    }
+
+    @Test
+    public void testOpenSocketAlreadyOpened() {
+        //Assert
+        ChatServer<Object> server = ChatServer.initEmptyChat(25003, null);
+        //Act
+        ChatServer<Object> server1 = ChatServer.initEmptyChat(25003, null);
+
+        server.close();
+        server1.close();
+        //Assign
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void testFindUser() {
+        //Assert
+        ChatServer<Object> server = ChatServer.initEmptyChat(25004, null);
+        UserAccount userAccount = new UserAccount(1, "toto");
+        UserInfo user = new UserInfo(userAccount, Status.ACTIVE);
+
+        //Act
+        server.notifyUserChange(user);
+        Optional<UserAccount> result = server.findUser("toto");
+
+        //Assign
+        Assert.assertEquals("The user name is the one added to the server",
+                userAccount.getUsername(), result.get().getUsername());
+    }
+
+    @Test
+    public void testCheckIdleClients() {
+        //Assert
+        ChatServer<Object> server = ChatServer.initEmptyChat(25005, null);
+        UserAccount userAccount = new UserAccount(1, "toto");
+        UserInfo user = new UserInfo(userAccount, Status.ACTIVE);
+
+        //Act
+        server.notifyUserChange(user);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        server.checkIdleClients();
+        Optional<UserInfo> result = server.getUsers().stream().findAny();
+
+        //Assign
+        Assert.assertEquals("The user status is inactive",
+                Status.INACTIVE, result.get().getCurrentStatus());
+    }
+
+    @Test
+    public void testLogin() {
+        //Assert
+        ChatServer<Object> server = ChatServer.initEmptyChat(25005, null);
+        //Act
+        server.login("toto");
+        server.checkIdleClients();
+        Optional<UserAccount> result = server.findUser("toto");
+
+        //Assign
+        Assert.assertEquals("The user status is inactive",
+                "toto", result.get().getUsername());
     }
 }

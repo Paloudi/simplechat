@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LoginGUI</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">chatProject.client.gui.text.user</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginGUI (chatProject.client.gui.text.user)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginGUI</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package chatProject.client.gui.text.user;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import chatProject.model.FakeInstances;
+<i class="no-highlight">4</i>&nbsp;import chatProject.client.chat.algo.ChatClient;
+<i class="no-highlight">5</i>&nbsp;import chatProject.client.gui.text.helpers.GUIHelpers;
+<i class="no-highlight">6</i>&nbsp;import chatProject.model.user.UserInfo;
+<i class="no-highlight">7</i>&nbsp;import chatProject.client.gui.text.main.MainWindowGUI;
+<i class="no-highlight">8</i>&nbsp;import com.googlecode.lanterna.TerminalSize;
+<i class="no-highlight">9</i>&nbsp;import com.googlecode.lanterna.TextColor;
+<i class="no-highlight">10</i>&nbsp;import com.googlecode.lanterna.gui2.*;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;/**
+<i class="no-highlight">13</i>&nbsp; * The window for login a user.
+<i class="no-highlight">14</i>&nbsp; * @param &lt;T&gt; the type of messages to use
+<i class="no-highlight">15</i>&nbsp; */
+<i class="no-highlight">16</i>&nbsp;public class LoginGUI&lt;T&gt; {
+<i class="no-highlight">17</i>&nbsp;    private final ChatClient&lt;T&gt; chat;
+<i class="no-highlight">18</i>&nbsp;    private final Window window;
+<i class="no-highlight">19</i>&nbsp;    private final Panel contentPanel;
+<b class="nc"><i class="no-highlight">20</i>&nbsp;    private final TextBox userName = new TextBox(new TerminalSize(20, 1));</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;    private final Label errors = new Label(&quot;&quot;).setForegroundColor(TextColor.ANSI.RED);</b>
+<i class="no-highlight">22</i>&nbsp;    private static final String LOGIN = &quot;Login&quot;;
+<b class="nc"><i class="no-highlight">23</i>&nbsp;</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;    public LoginGUI(ChatClient&lt;T&gt; chat, Window window, Panel contentPanel) {</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;        this.chat = chat;</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;        this.window = window;</b>
+<i class="no-highlight">27</i>&nbsp;        this.contentPanel = contentPanel;
+<i class="no-highlight">28</i>&nbsp;    }
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    public static &lt;T&gt; void init(ChatClient&lt;T&gt; chat, WindowBasedTextGUI textGUI) {
+<b class="nc"><i class="no-highlight">31</i>&nbsp;</b>
+<i class="no-highlight">32</i>&nbsp;        final Window window = new BasicWindow(LOGIN);
+<b class="nc"><i class="no-highlight">33</i>&nbsp;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;        Panel contentPanel = new Panel(new GridLayout(1));</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;        GridLayout gridLayout = (GridLayout) contentPanel.getLayoutManager();</b>
+<i class="no-highlight">36</i>&nbsp;        gridLayout.setHorizontalSpacing(2);
+<i class="no-highlight">37</i>&nbsp;
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        // init instance</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;        final LoginGUI&lt;T&gt; instance = new LoginGUI&lt;&gt;( chat, window, contentPanel);</b>
+<i class="no-highlight">40</i>&nbsp;        instance.createWindow();
+<i class="no-highlight">41</i>&nbsp;
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        // render the window</b>
+<i class="no-highlight">43</i>&nbsp;        textGUI.addWindowAndWait(window);
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    private void createWindow() {
+<b class="nc"><i class="no-highlight">47</i>&nbsp;</b>
+<i class="no-highlight">48</i>&nbsp;        GUIHelpers.addTitle(LOGIN, contentPanel);
+<b class="nc"><i class="no-highlight">49</i>&nbsp;</b>
+<i class="no-highlight">50</i>&nbsp;        contentPanel.addComponent(userName);
+<b class="nc"><i class="no-highlight">51</i>&nbsp;</b>
+<i class="no-highlight">52</i>&nbsp;        contentPanel.addComponent(
+<b class="nc"><i class="no-highlight">53</i>&nbsp;                new Button(LOGIN, () -&gt; {</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;                    final UserInfo login = chat.login(userName.getText());</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;                    if (login != null &amp;&amp; login != FakeInstances.UNKNOWN_USER_INFO) {</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;                        errors.setText(&quot;&quot;);</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;                        final WindowBasedTextGUI textGUI = window.getTextGUI();</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;                        window.close();</b>
+<b class="nc"><i class="no-highlight">59</i>&nbsp;                        MainWindowGUI.init(chat, textGUI);</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;                    } else {</b>
+<i class="no-highlight">61</i>&nbsp;                        errors.setText(&quot;Invalid login&quot;);
+<i class="no-highlight">62</i>&nbsp;                    }
+<i class="no-highlight">63</i>&nbsp;                })
+<i class="no-highlight">64</i>&nbsp;        );
+<b class="nc"><i class="no-highlight">65</i>&nbsp;</b>
+<i class="no-highlight">66</i>&nbsp;        contentPanel.addComponent(errors);
+<b class="nc"><i class="no-highlight">67</i>&nbsp;</b>
+<i class="no-highlight">68</i>&nbsp;        GUIHelpers.addCloseButton(contentPanel, window);
+<b class="nc"><i class="no-highlight">69</i>&nbsp;</b>
+<i class="no-highlight">70</i>&nbsp;        window.setComponent(contentPanel);
+<i class="no-highlight">71</i>&nbsp;    }
+<i class="no-highlight">72</i>&nbsp;
+<i class="no-highlight">73</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-22 14:02</div>
+</div>
+</body>
+</html>
