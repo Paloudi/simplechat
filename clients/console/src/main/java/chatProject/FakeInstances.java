@@ -28,7 +28,7 @@ public class FakeInstances {
     public static final UserInfo DUMMY_ACTIVE_USER = new UserInfo(DUMMY_ACCOUNT_1, Status.ACTIVE);
     public static final UserInfo DUMMY_LOGOUT_USER = new UserInfo(DUMMY_ACCOUNT_2, Status.INACTIVE);
 
-    public static final Map<UserInfo, LocalTime> DUMMY_USERS_MAP = new HashMap<>();
+    protected static final Map<UserInfo, LocalTime> DUMMY_USERS_MAP = new HashMap<>();
     static {
         DUMMY_USERS_MAP.put(DUMMY_ACTIVE_USER, LocalTime.now());
         DUMMY_USERS_MAP.put(DUMMY_LOGOUT_USER, LocalTime.now());

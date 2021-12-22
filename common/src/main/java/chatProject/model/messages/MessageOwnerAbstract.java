@@ -10,7 +10,7 @@ import chatProject.model.user.UserInfo;
 public abstract class MessageOwnerAbstract extends UserInfo {
 
     // we need to match the UserInfo constructor (no other need here)
-    public MessageOwnerAbstract(UserAccount account, Status currentStatus) {
+    protected MessageOwnerAbstract(UserAccount account, Status currentStatus) {
         super(account, currentStatus);
     }
 }

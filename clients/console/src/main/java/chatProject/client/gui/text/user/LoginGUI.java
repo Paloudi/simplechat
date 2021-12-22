@@ -19,6 +19,7 @@ public class LoginGUI<T> {
     private final Panel contentPanel;
     private final TextBox userName = new TextBox(new TerminalSize(20, 1));
     private final Label errors = new Label("").setForegroundColor(TextColor.ANSI.RED);
+    private static final String LOGIN = "Login";
 
     public LoginGUI(ChatClient<T> chat, Window window, Panel contentPanel) {
         this.chat = chat;
@@ -28,7 +29,7 @@ public class LoginGUI<T> {
 
     public static <T> void init(ChatClient<T> chat, WindowBasedTextGUI textGUI) {
 
-        final Window window = new BasicWindow("Login");
+        final Window window = new BasicWindow(LOGIN);
 
         Panel contentPanel = new Panel(new GridLayout(1));
         GridLayout gridLayout = (GridLayout) contentPanel.getLayoutManager();
@@ -44,12 +45,12 @@ public class LoginGUI<T> {
 
     private void createWindow() {
 
-        GUIHelpers.addTitle("Login", contentPanel);
+        GUIHelpers.addTitle(LOGIN, contentPanel);
 
         contentPanel.addComponent(userName);
 
         contentPanel.addComponent(
-                new Button("Login", () -> {
+                new Button(LOGIN, () -> {
                     final UserInfo login = chat.login(userName.getText());
                     if (login != null && login != FakeInstances.UNKNOWN_USER_INFO) {
                         errors.setText("");

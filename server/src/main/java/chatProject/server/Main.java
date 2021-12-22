@@ -2,14 +2,12 @@ package chatProject.server;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
-
 /**
  * The main class for the server instance.
  */
 public class Main {
 
-    public static <T> void main(String... args) throws IOException {
+    public static void main(String... args) {
 
         if (args.length != 2) {
             System.err.println("Required arguments : <socket port (listener)> <web server port>");
@@ -25,20 +23,6 @@ public class Main {
         final Gson json = new Gson();
         // start the server implementation
         final ChatServer<String> server = ChatServer.initEmptyChat(socketPort, json);
-
-        //Todo : use it or not use it, such is the question
-        /*
-        new ChatServer<>(FakeInstances.DUMMY_CHAT_INSTANCE, new HashSet<>(), json);
-
-        final Thread serverThread = new Thread(() -> {
-            try {
-                server.openSocket(socketPort);
-            } catch (IOException e) {
-                System.exit(1);
-            }
-        });
-        serverThread.start();
-         */
 
         // start the web services
         new ChatServerService<>(server, json).serve(webServerPort);

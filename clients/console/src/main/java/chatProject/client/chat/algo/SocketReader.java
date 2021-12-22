@@ -32,6 +32,7 @@ public class SocketReader<T> extends Thread {
         this.json = json;
     }
 
+    @Override
     public void run() {
         try {
             this.socket = new Socket(serverHostname, serverSocketPort);
@@ -42,44 +43,39 @@ public class SocketReader<T> extends Thread {
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
             while (true) {
-                try {
-                    String response = reader.readLine();
-                    if (response != null && !response.isEmpty()) {
-                        final int code = Character.getNumericValue(response.charAt(0));
-                        switch (code) {
-                            case 0:
-                                // ADD CHATROOM
-                                Type chatroomT = new TypeToken<Chatroom<T>>() {}.getType();
-                                final Chatroom<T> chatroom = json.fromJson(
-                                        response.substring(1),
-                                        chatroomT);
-                                chatClient.notifyNewChatroom(chatroom);
-                                break;
-                            case 1:
-                                // NEW MESSAGE
-                                final int chatroomId = Character.getNumericValue(response.charAt(1));
-                                Type messageT = new TypeToken<Message<T>>() {}.getType();
-                                final Message<T> msg = json.fromJson(
-                                        response.substring(2),
-                                        messageT
-                                );
-                                chatClient.notifyNewMessage(chatroomId, msg);
-                                break;
-                            case 2:
-                                // USER CHANGED
-                                final UserInfo user = json.fromJson(
-                                        response.substring(1),
-                                        UserInfo.class
-                                );
-                                chatClient.notifyUserChange(user);
-                            default:
-                                break;
-                        }
-
+                String response = reader.readLine();
+                if (response != null && !response.isEmpty()) {
+                    final int code = Character.getNumericValue(response.charAt(0));
+                    switch (code) {
+                        case 0:
+                            // ADD CHATROOM
+                            Type chatroomT = new TypeToken<Chatroom<T>>() {}.getType();
+                            final Chatroom<T> chatroom = json.fromJson(
+                                    response.substring(1),
+                                    chatroomT);
+                            chatClient.notifyNewChatroom(chatroom);
+                            break;
+                        case 1:
+                            // NEW MESSAGE
+                            final int chatroomId = Character.getNumericValue(response.charAt(1));
+                            Type messageT = new TypeToken<Message<T>>() {}.getType();
+                            final Message<T> msg = json.fromJson(
+                                    response.substring(2),
+                                    messageT
+                            );
+                            chatClient.notifyNewMessage(chatroomId, msg);
+                            break;
+                        case 2:
+                            // USER CHANGED
+                            final UserInfo user = json.fromJson(
+                                    response.substring(1),
+                                    UserInfo.class
+                            );
+                            chatClient.notifyUserChange(user);
+                            break;
+                        default:
+                            break;
                     }
-                } catch (IOException ex) {
-                    // socket closed
-                    return;
                 }
             }
         } catch (IOException e) {

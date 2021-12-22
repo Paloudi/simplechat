@@ -83,7 +83,6 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      * @param json the Json (de)serializer to use
      * @param <T> the type of messages to use
      * @return a new instance of this class to use as a server
-     * @throws IOException not sure when ?
      */
     public static <T> ChatServer<T> initEmptyChat(int socketPort, Gson json) {
 
@@ -211,38 +210,11 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      * @return an optional {@link UserAccount} with the user model only if already in the model
      */
     public Optional<UserAccount> findUser(String userName) {
-        // Test code
-        /*if (userName.equals("testUser")) {
-            return Optional.of(new UserAccount(0, userName));
-        } else {
-            return Optional.empty();
-        }*/
-
-        // Real code
-
         return chatInstance.getUsers().keySet().stream()
                 .map(UserInfo::getAccount)
                 .filter(account -> account.getUsername().equals(userName))
                 .findAny();
 
-    }
-
-    /**
-     * Gets the list of users in the model with an active status.
-     * @return the list of connected users
-     */
-    public Collection<String> getConnectedUsers() {
-        return Optional.ofNullable(getUsers())
-                // get all users in the model
-                .map(users -> users.parallelStream()
-                        // filter to get only active users
-                        .filter(user -> user.getCurrentStatus() == Status.ACTIVE)
-                        // get username(s) from user models
-                        .map(user -> user.getAccount().getUsername())
-                        // collect results
-                        .collect(Collectors.toSet()))
-                // if getUsers() returns null - return an empty set
-                .orElse(Collections.emptySet());
     }
 
     /**
